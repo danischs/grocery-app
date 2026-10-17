@@ -19,6 +19,7 @@ export default async function Home() {
 
   return (
     <div className="min-h-screen bg-cream">
+      <div className="max-w-md mx-auto relative">
       {/* Header */}
       <header className="bg-brand px-4 pt-4 pb-3 space-y-3">
         {/* Row 1: Wordmark + Urdu toggle */}
@@ -78,37 +79,43 @@ export default async function Home() {
           <h2 className="text-base font-semibold text-ink mb-3">Best Sellers</h2>
           <div className="grid grid-cols-2 gap-3">
             {bestSellers.map((product) => (
-              <div key={product.id} className="bg-white rounded-card overflow-hidden relative">
-                <div className="w-full h-40 bg-white flex items-center justify-center">
+              <div key={product.id} className="bg-white rounded-card overflow-hidden">
+                <div className="w-full h-32 bg-white flex items-center justify-center">
                   <Image
                     src={product.imageUrl!}
                     alt={product.name}
                     width={180}
-                    height={160}
-                    className="w-full h-40 object-contain"
+                    height={128}
+                    className="w-full h-32 object-contain"
                     unoptimized
                   />
                 </div>
-                <div className="p-3 pb-12">
-                  <p className="text-sm text-ink leading-snug line-clamp-2">{product.name}</p>
-                  <p className="text-sm font-semibold text-accent-text mt-1">
-                    {formatPrice(product.pricePaisa)}
-                  </p>
+                <div className="p-3 flex items-end justify-between gap-2">
+                  <div className="min-w-0">
+                    <p className="text-sm text-ink leading-snug line-clamp-2">{product.name}</p>
+                    <p className="text-sm font-semibold text-accent-text mt-1">
+                      {formatPrice(product.pricePaisa)}
+                    </p>
+                  </div>
+                  {/* 44px tap area, 36px visual circle */}
+                  <button
+                    className="shrink-0 flex items-center justify-center w-11 h-11"
+                    aria-label={`Add ${product.name} to cart`}
+                  >
+                    <span className="w-9 h-9 rounded-full bg-brand text-white text-xl flex items-center justify-center leading-none">+</span>
+                  </button>
                 </div>
-                <button
-                  className="absolute bottom-3 right-3 w-11 h-11 rounded-full bg-brand text-white text-xl flex items-center justify-center leading-none"
-                  aria-label={`Add ${product.name} to cart`}
-                >
-                  +
-                </button>
               </div>
             ))}
           </div>
         </section>
       </main>
 
+      </div>{/* /max-w-md */}
+
       {/* Bottom nav */}
-      <nav className="fixed bottom-0 inset-x-0 bg-white border-t border-line grid grid-cols-4 pb-[env(safe-area-inset-bottom)]">
+      <nav className="fixed bottom-0 inset-x-0 bg-white border-t border-line pb-[env(safe-area-inset-bottom)]">
+      <div className="max-w-md mx-auto grid grid-cols-4">
         {/* Home */}
         <button className="flex flex-col items-center justify-center gap-0.5 py-2 min-h-[56px] text-brand">
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className="w-5 h-5">
@@ -140,6 +147,7 @@ export default async function Home() {
           </svg>
           <span className="text-[10px] font-medium">Account</span>
         </button>
+      </div>{/* /max-w-md */}
       </nav>
     </div>
   );
