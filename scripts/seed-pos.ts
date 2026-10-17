@@ -8,7 +8,8 @@ import path from 'path';
 const GROCERY_FILE = path.resolve('data/grocery_file.xlsx');
 const MATCHES_FILE = path.resolve('data/product_matches.xlsx');
 const BATCH = 500;
-const NOW = new Date().toISOString();
+const NOW = new Date();
+const NOW_ISO = NOW.toISOString();
 
 // ---------------------------------------------------------------------------
 // Helpers
@@ -229,7 +230,7 @@ async function main() {
         UPDATE variants SET
           price_paisa    = d.p,
           is_active      = d.a,
-          last_synced_at = ${NOW}
+          last_synced_at = ${NOW_ISO}
         FROM jsonb_to_recordset(${vJson}::jsonb) AS d(id int, p int, a bool)
         WHERE variants.id = d.id
       `);
